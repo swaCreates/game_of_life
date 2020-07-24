@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.scss';
 
+import Grid from './components/DisplayGrid/Grid.js';
+import NavBar from './components/Nav/NavBar.js'
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello world</h1>
+      <NavBar />
+      <Grid />
     </div>
   );
 }
