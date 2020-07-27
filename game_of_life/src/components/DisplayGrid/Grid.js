@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
-const numRows = 50 // how I want grid to look
-const numCols = 50
+const numRows = 30 // how I want grid to look
+const numCols = 30
 
 export default function Grid() {
     const [grid, setGrid] = useState(() => { // will only run once, once initialized
@@ -14,7 +14,7 @@ export default function Grid() {
     });
 
     return (
-        <div>
+        <div className='grid-container'>
             {/* rendering grid on screen */}
             {grid.map((rows, i) => 
                 rows.map((col, j) => 

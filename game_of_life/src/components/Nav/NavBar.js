@@ -4,7 +4,7 @@ export default function NavBar() {
     
     return (
         <div>
-            <h1>John Conway's Game Of Life</h1>
+            <h1 className='navh1'>John Conway's Game Of Life</h1>
         </div>
     )
 }
