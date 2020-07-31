@@ -2,12 +2,13 @@ import React from 'react';
 import './App.scss';
 
 import Grid from './components/DisplayGrid/Grid.js';
-import NavBar from './components/Nav/NavBar.js'
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
+      <header>
+        <h1 className='navh1'>John Conway's Game Of Life</h1>
+      </header>
       <Grid />
     </div>
   );

@@ -19,19 +19,39 @@ const operations = [
 // think of center node as arr
 // helps cell shift to neighboring cells (coordinates)
 
+const emptyGrid = () => {
+    const rows = [];
+    for (let i = 0; i < numRows; i++) {
+        rows.push(Array.from(Array(numCols), () => 0)) // Array(len of arr) --> make all c dead
+    };
+
+    return rows
+};
+
 export default function Grid() {
     const [grid, setGrid] = useState(() => { // will only run once, once initialized
-        const rows = [];
-        for(let i = 0; i < numRows; i++){
-            rows.push(Array.from(Array(numCols), () => 0)) // Array(len of arr) --> make all c dead
-        };
-
-        return rows
+        return emptyGrid();
     });
 
     const [simulation, setSimulation] = useState(false);
 
     // Helper functions ////////
+
+    // button functions for grid
+    const resetGrid = () => {
+        setGrid(emptyGrid());
+    };
+
+    const randomGrid = () => {
+        const rows = [];
+        for (let i = 0; i < numRows; i++) {
+            rows.push(Array.from(Array(numCols), () => Math.random() > 0.7 ? 1 : 0)) 
+            // if random digit is greater than .7 make cells alive else dead
+        };
+
+        setGrid(rows);
+    };
+    // 
 
     const simulationRef = useRef(simulation); // need to hold and store original state simulation reference
     simulationRef.current = simulation;
@@ -93,24 +113,28 @@ export default function Grid() {
         <>
             <div className='grid-container'>
                 {/* rendering grid on screen */}
-                {grid.map((rows, i) => 
-                    rows.map((col, j) => 
-                    <div 
-                    key={`${i}-${j}`} 
-                    onClick = {() => {
-                        const newGrid = produce(grid, gridCopy => { // helps make copy of grid (immutable)
-                            gridCopy[i][j] = grid[i][j] ? 0 : 1; // if cell currently alive then make it dead (toggle)
-                        });
-                        setGrid(newGrid);
-                    }}
-                    style={{
-                        backgroundColor: grid[i][j] ? 'purple' : 'white'}} className='cells'>
-                    </div>)
-                )}
+                <h3>Generation: #</h3>
+                <div className='grid'>
+                    {grid.map((rows, i) => 
+                        rows.map((col, j) => 
+                        <div 
+                        key={`${i}-${j}`} 
+                        onClick = {() => {
+                            const newGrid = produce(grid, gridCopy => { // helps make copy of grid (immutable)
+                                gridCopy[i][j] = grid[i][j] ? 0 : 1; // if cell currently alive then make it dead (toggle)
+                            });
+                            setGrid(newGrid);
+                        }}
+                        style={{
+                            backgroundColor: grid[i][j] ? 'purple' : 'white'}} className='cells'>
+                        </div>)
+                    )}
+                </div>
             </div>
             <div className='control-panel'>
                 <button onClick={run} className='start'>{simulation ? 'Stop' : 'Start'}</button>
-                <button className='randomize'>Randomize</button>
+                <button onClick={randomGrid} className='randomize'>Randomize</button>
+                <button onClick={resetGrid} className='clear'>Clear</button>
             </div>
         </>
     );

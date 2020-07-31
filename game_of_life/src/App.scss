@@ -11,12 +11,25 @@
 
 // ----- Grid Component --------
 .grid-container{
-  display: grid;
-  grid-template-columns: repeat(25, 20px);
-  margin: 2% 20% 0% 20%;
-  width: 62.5%;
-  padding-left: 13%;
+  // display: grid;
+  // grid-template-columns: repeat(25, 20px);
+  // margin: 2% 20% 0% 20%;
+  // width: 62.5%;
+  // padding-left: 13%;
   // border: 2px solid black;
+
+  h3{
+    color: white;
+    font-size: 1.1rem;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(25, 20px);
+    margin: 2% 20% 0% 20%;
+    width: 62.5%;
+    padding-left: 13%;
+  }
 
   .cells{
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
@@ -43,6 +56,7 @@
     color: orangered;
     border: none;
     outline: none;
+    border-radius: 3px;
   }
 
   .start:hover{
@@ -54,13 +68,34 @@
 
   .randomize{
     cursor: pointer;
+    margin-right: 10%;
     font-size: 1rem;
     color: orangered;
     border: none;
     outline: none;
+    border-radius: 3px;
+    padding: 2%;
   }
 
   .randomize:hover{
+    box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
+    outline: none;
+    position: relative;
+    bottom: 1px;
+  }
+
+  .clear{
+    cursor: pointer;
+    font-size: 1rem;
+    color: orangered;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 1%;
+    width: 20%;
+  }
+
+  .clear:hover{
     box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
     outline: none;
     position: relative;
