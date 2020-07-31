@@ -2,44 +2,11 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 // ---- NavBar -----
 .navh1{
   margin-top: 2%;
+  color: white;
+  font-size: 2rem;
 }
 
 // ----- Grid Component --------
@@ -60,8 +27,8 @@
 
 .control-panel{
   display: flex;
-  border: 1px solid red;
-  width: 20%;
+  // border: 1px solid red;
+  width: 25%;
   margin: 2% auto 0 auto;
   justify-content: center;
 
@@ -69,10 +36,32 @@
     margin-right: 10%;
     cursor: pointer;
     padding: 1%;
-    width: 20%;
+    width: 22%;
+    font-size: 1rem;
+    color: orangered;
+    border: none;
+    outline: none;
+  }
+
+  .start:hover{
+    box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
+    outline: none;
+    position: relative;
+    bottom: 1px;
   }
 
   .randomize{
     cursor: pointer;
+    font-size: 1rem;
+    color: orangered;
+    border: none;
+    outline: none;
+  }
+
+  .randomize:hover{
+    box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
+    outline: none;
+    position: relative;
+    bottom: 1px;
   }
 }
