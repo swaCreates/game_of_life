@@ -12,16 +12,18 @@
 // ----- Grid Component --------
 .grid-container{
   display: grid;
-  grid-template-columns: repeat(45, 20px);
+  grid-template-columns: repeat(25, 20px);
   margin: 2% 20% 0% 20%;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   width: 62.5%;
+  padding-left: 13%;
+  // border: 2px solid black;
 
   .cells{
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   width: 20px;
   height: 20px;
-  border: 1px solid black;
   cursor: pointer;
+  border: 2px solid white;
   }
 }
 

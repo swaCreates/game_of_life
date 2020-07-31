@@ -2,8 +2,8 @@ import React, {useState, useCallback, useRef} from 'react';
 
 import produce from 'immer';
 
-const numRows = 30 // how I want grid to look
-const numCols = 30 // (potential ref of cells)
+const numRows = 25 // how I want grid to look
+const numCols = 25 // (potential ref of cells)
 
 const operations = [
     [0, 1],
@@ -17,7 +17,7 @@ const operations = [
 ];
 
 // think of center node as arr
-// helps cell shift to neighboring cells
+// helps cell shift to neighboring cells (coordinates)
 
 export default function Grid() {
     const [grid, setGrid] = useState(() => { // will only run once, once initialized
@@ -37,9 +37,12 @@ export default function Grid() {
     simulationRef.current = simulation;
 
     const runSimulation = useCallback(() => { // useEffect type of hook
-        if(!simulation.current){ // if no simulation return
+        if(!simulationRef.current){ // if no simulation return
+            // console.log('no simulation')
             return;
         };
+
+        // console.log('simulation')
 
         // simulate
         setGrid(currGrid => {
