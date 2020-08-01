@@ -35,11 +35,15 @@ export default function Grid() {
 
     const [simulation, setSimulation] = useState(false);
 
+    const initialState = 0;
+    const [generation, setGeneration] = useState(initialState);
+
     // Helper functions ////////
 
     // button functions for grid
     const resetGrid = () => {
         setGrid(emptyGrid());
+        setGeneration(initialState); // set generation back to 0
     };
 
     const randomGrid = () => {
@@ -63,6 +67,9 @@ export default function Grid() {
         };
 
         // console.log('simulation')
+        setGeneration((orig) => {
+            return orig + 1
+        });
 
         // simulate
         setGrid(currGrid => {
@@ -113,17 +120,19 @@ export default function Grid() {
         <>
             <div className='grid-container'>
                 {/* rendering grid on screen */}
-                <h3>Generation: #</h3>
+                <h3>Generation: #{generation}</h3>
                 <div className='grid'>
                     {grid.map((rows, i) => 
                         rows.map((col, j) => 
                         <div 
                         key={`${i}-${j}`} 
                         onClick = {() => {
-                            const newGrid = produce(grid, gridCopy => { // helps make copy of grid (immutable)
-                                gridCopy[i][j] = grid[i][j] ? 0 : 1; // if cell currently alive then make it dead (toggle)
-                            });
-                            setGrid(newGrid);
+                            if(!simulation){ // if simulation
+                                const newGrid = produce(grid, gridCopy => { // helps make copy of grid (immutable)
+                                    gridCopy[i][j] = grid[i][j] ? 0 : 1; // if cell currently alive then make it dead (toggle)
+                                });
+                                setGrid(newGrid);
+                            };
                         }}
                         style={{
                             backgroundColor: grid[i][j] ? 'purple' : 'white'}} className='cells'>
