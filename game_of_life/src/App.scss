@@ -36,15 +36,15 @@
 .control-panel{
   display: flex;
   // border: 1px solid red;
-  width: 25%;
+  width: 75%;
   margin: 2% auto 0 auto;
-  justify-content: center;
+  justify-content: space-around;
 
   .start{
     margin-right: 10%;
     cursor: pointer;
     padding: 1%;
-    width: 22%;
+    width: 70%;
     font-size: 1rem;
     color: orangered;
     border: none;
@@ -68,6 +68,7 @@
     outline: none;
     border-radius: 3px;
     padding: 2%;
+    width: 70%;
   }
 
   .randomize:hover{
@@ -79,16 +80,73 @@
 
   .clear{
     cursor: pointer;
+    margin-right: 10%;
     font-size: 1rem;
     color: orangered;
     border: none;
     outline: none;
     border-radius: 3px;
     padding: 1%;
-    width: 20%;
+    width: 70%;
   }
 
   .clear:hover{
+    box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
+    outline: none;
+    position: relative;
+    bottom: 1px;
+  }
+
+  .fast{
+    cursor: pointer;
+    margin-right: 10%;
+    font-size: 1rem;
+    color: orangered;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 2%;
+    width: 70%;
+  }
+
+  .fast:hover{
+    box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
+    outline: none;
+    position: relative;
+    bottom: 1px;
+  }
+
+  .slow{
+    cursor: pointer;
+    margin-right: 10%;
+    font-size: 1rem;
+    color: orangered;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 2%;
+    width: 70%;
+  }
+
+  .slow:hover{
+    box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
+    outline: none;
+    position: relative;
+    bottom: 1px;
+  }
+
+  .size{
+    cursor: pointer;
+    font-size: 1rem;
+    color: orangered;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 2%;
+    width: 70%;
+  }
+
+  .size:hover{
     box-shadow: 0px 15px 20px rgba(243, 85, 204, 0.2);
     outline: none;
     position: relative;

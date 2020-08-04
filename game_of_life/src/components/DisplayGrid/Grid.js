@@ -1,9 +1,10 @@
 import React, {useState, useCallback, useRef} from 'react';
+import {ButtonToolbar, Dropdown, DropdownButton} from 'react-bootstrap';
 
 import produce from 'immer';
 
-const numRows = 25 // how I want grid to look
-const numCols = 25 // (potential ref of cells)
+let numRows = 25 // how I want grid to look
+let numCols = 25 // (potential ref of cells)
 
 const operations = [
     [0, 1],
@@ -29,14 +30,24 @@ const emptyGrid = () => {
 };
 
 export default function Grid() {
+    const [numRows, setNumRows] = useState(25)
+    const [numCols, setNumCols] = useState(25)
     const [grid, setGrid] = useState(() => { // will only run once, once initialized
         return emptyGrid();
     });
 
-    const [simulation, setSimulation] = useState(false);
+    const [simulation, setSimulation] = useState(false); // is game on or off?
 
     const initialState = 0;
-    const [generation, setGeneration] = useState(initialState);
+    const [generation, setGeneration] = useState(initialState); // the count of generations
+
+    const [speed, setSpeed] = useState(500); // game speeds
+    
+    const [gridSize, setGridSize] = useState(); // changing the grid size
+
+    const handleSelect = evt => {
+        setGridSize(evt);
+    };
 
     // Helper functions ////////
 
@@ -60,6 +71,7 @@ export default function Grid() {
     const simulationRef = useRef(simulation); // need to hold and store original state simulation reference
     simulationRef.current = simulation;
 
+    //
     const runSimulation = useCallback(() => { // useEffect type of hook
         if(!simulationRef.current){ // if no simulation return
             // console.log('no simulation')
@@ -102,8 +114,9 @@ export default function Grid() {
             });
         });
 
-        setTimeout(runSimulation, 500);
+        const timer = setTimeout(runSimulation, speed);
     }, []);
+    //
 
     const run = () => { // function to run sim when clicked on button below
         setSimulation(!simulation);
@@ -111,6 +124,38 @@ export default function Grid() {
         if(!simulation){
             simulationRef.current = true; // since initial is false we must toggle to true
             runSimulation();
+        };
+    };
+
+    const size = (size) => {
+        switch (size){
+            case '1':
+               setNumRows(20)
+               setNumCols(10)
+            break;
+            case '2':
+                setNumRows(50)
+                setNumCols(30)
+                break;
+            default:
+                setNumRows(70)
+                setNumCols(50)
+        }
+        resetGrid();
+    };
+
+    const colorArr = [
+        '#2E0854', '#9B30FF', '#4B0082', '#FFFF99', '#00B3E6',
+        '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+        '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
+        '#FF99E6', '#CCFF1A', '#FF1A66', '#BF5FFF', '#33FFCC',
+        '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
+        '#551A8B', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+
+    const fetchRandomColor = () => {
+        for(let i = 0; i < colorArr.length; i++){
+            const randomColor = colorArr[Math.floor(Math.random() * 16)];
+            return randomColor;
         };
     };
 
@@ -135,7 +180,7 @@ export default function Grid() {
                             };
                         }}
                         style={{
-                            backgroundColor: grid[i][j] ? 'purple' : 'white'}} className='cells'>
+                            backgroundColor: grid[i][j] ? fetchRandomColor() : 'white'}} className='cells'>
                         </div>)
                     )}
                 </div>
@@ -144,6 +189,19 @@ export default function Grid() {
                 <button onClick={run} className='start'>{simulation ? 'Stop' : 'Start'}</button>
                 <button onClick={randomGrid} className='randomize'>Randomize</button>
                 <button onClick={resetGrid} className='clear'>Clear</button>
+                {/* <button onClick={runSlow} className='slow'>Slow</button> */}
+                {/* <button onClick={runFast} className='fast'>Fast</button> */}
+                <ButtonToolbar>
+                    <DropdownButton
+                    title='gridSize'
+                    className='size'
+                    onSelect={handleSelect}
+                    >
+                        <Dropdown.Item onSelect={size} eventKey='1'>20x10</Dropdown.Item>
+                        <Dropdown.Item eventKey='2'>50x30</Dropdown.Item>
+                        <Dropdown.Item eventKey='3'>70x50</Dropdown.Item>
+                    </DropdownButton>
+                </ButtonToolbar>
             </div>
         </>
     );
