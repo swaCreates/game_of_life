@@ -1,5 +1,4 @@
 import React, {useState, useCallback, useRef} from 'react';
-import {ButtonToolbar, Dropdown, DropdownButton} from 'react-bootstrap';
 
 import produce from 'immer';
 
@@ -30,8 +29,6 @@ const emptyGrid = () => {
 };
 
 export default function Grid() {
-    const [numRows, setNumRows] = useState(25)
-    const [numCols, setNumCols] = useState(25)
     const [grid, setGrid] = useState(() => { // will only run once, once initialized
         return emptyGrid();
     });
@@ -41,14 +38,8 @@ export default function Grid() {
     const initialState = 0;
     const [generation, setGeneration] = useState(initialState); // the count of generations
 
-    const [speed, setSpeed] = useState(500); // game speeds
+    const [speed] = useState(500); // game speeds
     
-    const [gridSize, setGridSize] = useState(); // changing the grid size
-
-    const handleSelect = evt => {
-        setGridSize(evt);
-    };
-
     // Helper functions ////////
 
     // button functions for grid
@@ -58,6 +49,7 @@ export default function Grid() {
     };
 
     const randomGrid = () => {
+        resetGrid();
         const rows = [];
         for (let i = 0; i < numRows; i++) {
             rows.push(Array.from(Array(numCols), () => Math.random() > 0.7 ? 1 : 0)) 
